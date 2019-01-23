@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Palette Picker</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+  </head>
+  <body>
+    <section class="palette-container">
+      <div class="palette">
+        <div class="first"></div>
+        <div class="second"></div>
+        <div class="third"></div>
+        <div class="fourth"></div>
+        <div class="fifth"></div>
+      </div>
+    </section>
+    <h1>Palette Picker</h1>
+    <main>
+      <button>New Colors</button>
+      <form>
+        <h4>Love this palette? Save it!</h4>
+        <label for="project-select" >Save to</label>
+        <select id="project-select">
+          <option value="">Project Name</option>
+        </select>
+        <input type="text" placeholder="Palette Name" />
+        <button class="palette-btn">Save</button>
+      </form>
+      <hr />
+      <form>
+        <label for="project-input">Create New Project:</label>
+        <input id="project-input" placeholder="Project Name" type="text" />
+        <button>Save</button>
+      </form>
+      <h3>Saved Projects</h3>
+    </main>
+    <script src="./index.js"></script>
+  </body>
+</html>
