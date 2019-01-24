@@ -3,8 +3,11 @@ const app = express();
 
 app.use(express.static('public'));
 
-app.listen(3000, () => {
-  console.log('Running on localhost:3000');
+app.set('port', process.env.PORT || 3000);
+
+app.locals.title = 'Palette Picker';
+app.listen(app.get('port'), () => {
+  console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });
 
 app.get('/api/v1/projects', (request, response) => {
