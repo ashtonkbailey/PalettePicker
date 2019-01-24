@@ -15,7 +15,8 @@ function changeColors() {
   const fourthColor = getRandomColor();
   const fifthColor = getRandomColor();
 
-  assignColors(firstColor, secondColor, thirdColor, fourthColor, fifthColor)
+  assignColors(firstColor, secondColor, thirdColor, fourthColor, fifthColor);
+  changeColorLabels(firstColor, secondColor, thirdColor, fourthColor, fifthColor)
 }
 
 function assignColors(color1, color2, color3, color4, color5) {
@@ -24,4 +25,12 @@ function assignColors(color1, color2, color3, color4, color5) {
   $('.third').css('background-color', `#${color3}`);
   $('.fourth').css('background-color', `#${color4}`);
   $('.fifth').css('background-color', `#${color5}`);
+}
+
+function changeColorLabels(color1, color2, color3, color4, color5) {
+  $('.first-hex').text(`#${color1}`);
+  $('.second-hex').text(`#${color2}`);
+  $('.third-hex').text(`#${color3}`);
+  $('.fourth-hex').text(`#${color4}`);
+  $('.fifth-hex').text(`#${color5}`);
 }
