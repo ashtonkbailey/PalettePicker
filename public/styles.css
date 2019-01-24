@@ -59,7 +59,7 @@ h2 {
   font-size: 16px; 
   margin: 0;
   border: none;
-  padding: 0 20px;
+  padding: 0 30px;
   text-align: end;
 }
 
@@ -98,8 +98,6 @@ h2 {
 }
 
 .new-colors {
-  /*display: block;
-  margin: auto;*/
   margin-top: 2em;
   height: 4em;
   width: 10em;
