@@ -1,6 +1,28 @@
 
 exports.seed = function(knex, Promise) {
-  
+  return knex('palettes').del()
+    .then(() => knex('projects').del())
+    .then(() => {
+      return Promise.all([
+        knex('projects').insert({ name: 'Sample Project' }, 'id')
+        .then(project => {
+          return knex('palettes').insert([
+            {
+              name: 'Sunset',
+              color_one: 'F18C8E',
+              color_two: 'F0B784',
+              color_three: '',
+              color_four: '',
+              color_five: '',
+              project_id: project[0]
+            }
+          ])
+        })
+        .then(() => console.log('Seeding is finished'))
+        .catch(error => console.log(`Error with the seeding: ${error}`))
+      ])
+    })
+    .catch(error => console.log(`Error with the seeding: ${error}`))
 };
 
 // Clear out both tables (palettes first, as they depend on projects existing)
