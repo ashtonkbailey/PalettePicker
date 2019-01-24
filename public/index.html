@@ -3,35 +3,57 @@
   <head>
     <title>Palette Picker</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Condensed:400,700|Sarina" rel="stylesheet">
   </head>
   <body>
     <section class="palette-container">
       <div class="palette">
-        <div class="first"></div>
-        <div class="second"></div>
-        <div class="third"></div>
-        <div class="fourth"></div>
-        <div class="fifth"></div>
+        <h2>TONEPAN&reg;</h2>
+        <div class="swatch first"></div>
+        <div class="hex-container">
+          <p class="first-hex hex">#fffff</p>
+          <button class="first-lock lock">lock</button>
+        </div>
+        <div class="swatch second"></div>
+        <div class="hex-container">
+          <p class="second-hex hex">#fffff</p>
+          <button class="second-lock lock">lock</button>
+        </div>
+        <div class="swatch third"></div>
+        <div class="hex-container">
+          <p class="third-hex hex">#fffff</p>
+          <button class="third-lock lock">lock</button>
+        </div>
+        <div class="swatch fourth"></div>
+        <div class="hex-container">
+          <p class="fourth-hex hex">#fffff</p>
+          <button class="fourth-lock lock">lock</button>
+        </div>
+        <div class="swatch fifth"></div>
+        <div class="hex-container">
+          <p class="fifth-hex hex">#fffff</p>
+          <button class="fifth-lock lock">lock</button>
+        </div>
       </div>
     </section>
-    <h1>Palette Picker</h1>
-    <main>
-      <button>New Colors</button>
-      <form>
-        <h4>Love this palette? Save it!</h4>
-        <label for="project-select" >Save to</label>
+    <h1 class="title">Palette <br/>&nbsp; &nbsp; &nbsp; &nbsp;Picker</h1>
+    <main class="user-section">
+      <button class="new-colors">New Colors</button>
+      <h4>Love this palette? Save it!</h4>
+      <form class="palette-form">
+        <label for="project-select" >Save to:</label>
         <select id="project-select">
           <option value="">Project Name</option>
         </select>
-        <input type="text" placeholder="Palette Name" />
+        <input class="palette-input" type="text" placeholder="Palette Name" />
         <button class="palette-btn">Save</button>
       </form>
-      <hr />
-      <form>
-        <label for="project-input">Create New Project:</label>
+      <form class="project-form">
+        <label for="project-input">New Project:</label>
         <input id="project-input" placeholder="Project Name" type="text" />
-        <button>Save</button>
+        <button class="project-btn">Save</button>
       </form>
+      <hr />
       <h3>Saved Projects</h3>
     </main>
     <script src="./index.js"></script>
