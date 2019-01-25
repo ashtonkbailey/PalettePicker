@@ -16,7 +16,13 @@ app.listen(app.get('port'), () => {
 });
 
 app.get('/api/v1/projects', (request, response) => {
-  // get projects
+  database('projects').select()
+    .then((projects) =>{
+      response.status(200).json(projects);
+    })
+    .catch((error => {
+      response.status(500).json({ error });
+    }))
 });
 
 app.post('/api/v1/projects', (request, response) => {
