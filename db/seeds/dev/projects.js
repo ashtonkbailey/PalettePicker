@@ -11,9 +11,9 @@ exports.seed = function(knex, Promise) {
               name: 'Sunset',
               color_one: 'F18C8E',
               color_two: 'F0B784',
-              color_three: '',
-              color_four: '',
-              color_five: '',
+              color_three: 'F1D1B5',
+              color_four: '568EA6',
+              color_five: '305F72',
               project_id: project[0]
             }
           ])

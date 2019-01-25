@@ -4,6 +4,7 @@
   "description": "Random color generator that allows user to save palettes of five colors",
   "main": "server.js",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "jquery": "^3.3.1",
     "knex": "^0.16.3",
