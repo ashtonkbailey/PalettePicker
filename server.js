@@ -28,7 +28,7 @@ app.get('/api/v1/projects', (request, response) => {
 app.post('/api/v1/projects', (request, response) => {
   const project = request.body;
 
-  for (let requiredParameter of 'name') {
+  for (let requiredParameter of ['name']) {
     if(!project[requiredParameter]) {
       return response.status(422).send({ error: `Expected format: { name: <String> }. You're missing a "${requiredParameter}" property.` });
     }
