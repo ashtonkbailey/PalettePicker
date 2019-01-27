@@ -2,7 +2,7 @@
 $('.new-colors').click(changeColors);
 $('.lock').click(toggleLockBtn);
 $(document).ready(changeColors);
-$('.project-btn').click((e) => addOption);
+$('.project-btn').click((e) => addOption(e));
 
 // fn to make random hex colors // returns 6 digit hex code
 function getRandomColor() {
@@ -57,4 +57,5 @@ function addOption(e) {
   const projectName = $('#project-input').val();
   const select = $('#project-select');
   select.append(`<option>${projectName}</option>`);
+  $('#project-input').val('');
 }
