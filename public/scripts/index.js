@@ -18,6 +18,7 @@ function changeColors() {
   const fifthColor = getRandomColor();
 
   assignColors(firstColor, secondColor, thirdColor, fourthColor, fifthColor);
+  changeBackground(firstColor, secondColor, thirdColor, fourthColor, fifthColor)
   changeColorLabels(firstColor, secondColor, thirdColor, fourthColor, fifthColor)
 };
 
@@ -28,6 +29,10 @@ function assignColors(color1, color2, color3, color4, color5) {
   $('.fourth').css('background-color', `#${color4}`);
   $('.fifth').css('background-color', `#${color5}`);
 };
+
+function changeBackground(color1, color2, color3, color4, color5) {
+  $('.body').css('background', `linear-gradient(0deg, rgba(89, 86, 86, 0.45), rgba(89, 86, 86, 0.45)), linear-gradient(180deg, #${color1} 0%, #${color2} 20.99%, #${color3} 47.51%, #${color4} 73.48%, #${color5} 100%) no-repeat`);
+}
 
 function changeColorLabels(color1, color2, color3, color4, color5) {
   $('.first-hex').text(`#${color1}`);
