@@ -1,8 +1,10 @@
+import * from './apiCalls';
+
 // EVENT LISTENERS
 $('.new-colors').click(changeColors);
 $('.lock').click(toggleLockBtn);
 $(document).ready(changeColors);
-$('.project-btn').click((e) => addOption(e));
+$('.project-btn').click((e) => addProject(e));
 
 // fn to make random hex colors // returns 6 digit hex code
 function getRandomColor() {
@@ -49,10 +51,20 @@ function toggleLockBtn() {
   }
 };
 
-function addOption(e) {
+function addProject(e) {
   e.preventDefault();
   const projectName = $('#project-input').val();
+  addOption(projectName);
+  postProject(projectName);
+  showProject(projectName);
+};
+
+function addOption(name) {
   const select = $('#project-select');
-  select.append(`<option>${projectName}</option>`);
+  select.append(`<option>${name}</option>`);
   $('#project-input').val('');
 };
+
+function showProject(name) {
+  $('.projects-container').append(`<div class="project-div"><h4>${name}</h4></div>`);
+}
