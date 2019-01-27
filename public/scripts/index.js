@@ -9,8 +9,6 @@ function getRandomColor() {
   return Math.floor(Math.random()*16777215).toString(16);
 };
 
-// when new colors btn is clicked, run gRC() five times and assign each color to each div
-// also assign to background...?
 function changeColors() {
   const firstColor = getRandomColor();
   const secondColor = getRandomColor();
@@ -33,7 +31,7 @@ function assignColors(color1, color2, color3, color4, color5) {
 
 function changeBackground(color1, color2, color3, color4, color5) {
   $('.body').css('background', `linear-gradient(0deg, rgba(89, 86, 86, 0.45), rgba(89, 86, 86, 0.45)), linear-gradient(180deg, #${color1} 0%, #${color2} 20.99%, #${color3} 47.51%, #${color4} 73.48%, #${color5} 100%) no-repeat`);
-}
+};
 
 function changeColorLabels(color1, color2, color3, color4, color5) {
   $('.first-hex').text(`#${color1}`);
@@ -49,13 +47,12 @@ function toggleLockBtn() {
   } else {
     $(this).text('lock');
   }
-}
+};
 
 function addOption(e) {
   e.preventDefault();
-  // grab input value, grab select, append option to select
   const projectName = $('#project-input').val();
   const select = $('#project-select');
   select.append(`<option>${projectName}</option>`);
   $('#project-input').val('');
-}
+};
