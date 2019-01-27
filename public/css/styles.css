@@ -8,6 +8,7 @@ body {
     'sidebar main main'
     'sidebar main main';
   overflow: hidden;
+  height: 100vh;
 }
 
 /*COLOR PALETTE*/
