@@ -1,6 +1,7 @@
 // EVENT LISTENERS
 $('.new-colors').click(changeColors);
 $('.lock').click(toggleLockBtn);
+$(document).ready(changeColors);
 
 // fn to make random hex colors // returns 6 digit hex code
 function getRandomColor() {
