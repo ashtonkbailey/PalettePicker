@@ -1,9 +1,20 @@
 // EVENT LISTENERS
+$(document).ready(loadPage);
 $('.new-colors').click(changeColors);
 $('.lock').click(toggleLockBtn);
-$(document).ready(changeColors);
 $('.project-btn').click((e) => addProject(e));
+$('.palette-btn').click((e) => addPalette(e));
 
+async function loadPage() {
+  changeColors();
+  const projects = await getProjects();
+  projects.map((project) => {
+    addOption(project.name);
+    showProject(project.name);
+  })
+}
+
+// Update colors
 // fn to make random hex colors // returns 6 digit hex code
 function getRandomColor() {
   return Math.floor(Math.random()*16777215).toString(16);
@@ -41,6 +52,7 @@ function changeColorLabels(color1, color2, color3, color4, color5) {
   $('.fifth-hex').text(`#${color5}`);
 };
 
+// Lock/Unlock
 function toggleLockBtn() {
   if (this.innerText === 'lock') {
     $(this).text('locked');
@@ -49,6 +61,7 @@ function toggleLockBtn() {
   }
 };
 
+// ADD PROJECT
 function addProject(e) {
   e.preventDefault();
   const projectName = $('#project-input').val();
@@ -59,13 +72,67 @@ function addProject(e) {
 
 function addOption(name) {
   const select = $('#project-select');
-  select.append(`<option>${name}</option>`);
+  select.append(`<option value="${name}">${name}</option>`);
   $('#project-input').val('');
 };
 
 function showProject(name) {
-  $('.projects-container').append(`<div class="project-div"><h4>${name}</h4></div>`);
+  const dashedName = name.replace(/\s+/g, "-");
+  $('.projects-container').append(`<div class="project-div"><ul id=${dashedName}>${name}</ul></div>`);
 };
+
+// ADD PALETTE
+function addPalette(e) {
+  e.preventDefault();
+  const paletteName = $('.palette-input').val();
+  const project = $('#project-select option:selected').text();
+  const dashedProject = project.replace(/\s+/g, "-");
+  $(`#${dashedProject}`).append(`<li>${paletteName}</li>`);
+  assignPalette();
+
+};
+
+async function assignPalette() {
+  const name = $('.palette-input').val();
+  const color_one = $('.first-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  const color_two = $('.second-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  const color_three = $('.third-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  const color_four = $('.fourth-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  const color_five = $('.fifth-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  const project_id = await getProjectID();
+  const palette = { name, color_one, color_two, color_three, color_four, color_five, project_id };
+  console.log(palette);
+  return palette
+}
+
+async function getProjectID() {
+  const projectName = $('#project-select option:selected').text();
+  try {
+    const response = await fetch(`http://localhost:3000/api/v1/projects/${projectName}`);
+    if (!response.ok) {
+      throw Error('Could not get project')
+    }
+    const project = await response.json();
+    return project.id
+  } catch (error) {
+    throw Error('Could not get project')
+  }
+}
+
+async function postPalette(palette) {
+  try {
+    const response = await fetch('http://localhost:3000/api/v1/palettes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(palette)
+    })
+    const data = await response.json()
+  } catch (error) {
+    throw Error('Could not post the palette')
+  }
+}
 
 // API CALLS
 async function getProjects() {
@@ -84,20 +151,23 @@ async function getProjects() {
 async function postProject(projectName) {
   const projects = await getProjects();
 
-  projects.map(project => {
+  projects.map(async (project) => {
     if (project.name === projectName) {
       alert('That project already exists! Please try a different name.');
       return;
     } else {
-      return fetch('http://localhost:3000/api/v1/projects', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name: projectName })
-      })
-        .then(response => response.json())
-        .catch(error => console.log(error))
+      try {
+        const response = await fetch('http://localhost:3000/api/v1/projects', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name: projectName })
+        })
+        const data = response.json()
+      } catch (error) {
+        throw Error('Couldn\'t post the project')
+      }
     }
   })
 };

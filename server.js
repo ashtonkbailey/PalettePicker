@@ -20,10 +20,26 @@ app.get('/api/v1/projects', (request, response) => {
     .then((projects) =>{
       response.status(200).json(projects);
     })
-    .catch((error => {
+    .catch((error) => {
       response.status(500).json({ error });
-    }))
+    })
 });
+
+app.get('/api/v1/projects/:name', (request, response) => {
+  database('projects').where('name', request.params.name).select()
+    .then((projects) => {
+      if (projects.length) {
+        response.status(200).json(projects);
+      } else {
+        response.status(404).json({
+          error: `Could not find project with name ${request.params.name}`
+        });
+      }
+    })
+    .catch((error) => {
+      response.status(500).json({ error });
+    });
+})
 
 app.post('/api/v1/projects', (request, response) => {
   const project = request.body;
