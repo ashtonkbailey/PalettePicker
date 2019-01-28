@@ -2,7 +2,7 @@
 $('.new-colors').click(changeColors);
 $('.lock').click(toggleLockBtn);
 $(document).ready(changeColors);
-$('.project-btn').click((e) => addOption(e));
+$('.project-btn').click((e) => addProject(e));
 
 // fn to make random hex colors // returns 6 digit hex code
 function getRandomColor() {
@@ -49,10 +49,55 @@ function toggleLockBtn() {
   }
 };
 
-function addOption(e) {
+function addProject(e) {
   e.preventDefault();
   const projectName = $('#project-input').val();
+  postProject(projectName);
+  addOption(projectName);
+  showProject(projectName);
+};
+
+function addOption(name) {
   const select = $('#project-select');
-  select.append(`<option>${projectName}</option>`);
+  select.append(`<option>${name}</option>`);
   $('#project-input').val('');
+};
+
+function showProject(name) {
+  $('.projects-container').append(`<div class="project-div"><h4>${name}</h4></div>`);
+};
+
+// API CALLS
+async function getProjects() {
+  try {
+    const response = await fetch('http://localhost:3000/api/v1/projects');
+    if (!response.ok) {
+      throw Error('Couldn\'t get your projects!')
+    }
+    const projects = await response.json()
+    return projects;
+  } catch (error) {
+    throw Error('Couldn\'t get your projects!')
+  }
+};
+
+async function postProject(projectName) {
+  const projects = await getProjects();
+
+  projects.map(project => {
+    if (project.name === projectName) {
+      alert('That project already exists! Please try a different name.');
+      return;
+    } else {
+      return fetch('http://localhost:3000/api/v1/projects', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name: projectName })
+      })
+        .then(response => response.json())
+        .catch(error => console.log(error))
+    }
+  })
 };
