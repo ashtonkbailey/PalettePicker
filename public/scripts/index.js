@@ -88,6 +88,50 @@ function addPalette(e) {
   const project = $('#project-select option:selected').text();
   const dashedProject = project.replace(/\s+/g, "-");
   $(`#${dashedProject}`).append(`<li>${paletteName}</li>`);
+  assignPalette();
+
+};
+
+async function assignPalette() {
+  const name = $('.palette-input').val();
+  const color_one = $('.first-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  const color_two = $('.second-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  const color_three = $('.third-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  const color_four = $('.fourth-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  const color_five = $('.fifth-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  const project_id = await getProjectID();
+  const palette = { name, color_one, color_two, color_three, color_four, color_five, project_id };
+  console.log(palette);
+  return palette
+}
+
+async function getProjectID() {
+  const projectName = $('#project-select option:selected').text();
+  try {
+    const response = await fetch(`http://localhost:3000/api/v1/projects/${projectName}`);
+    if (!response.ok) {
+      throw Error('Could not get project')
+    }
+    const project = await response.json();
+    return project.id
+  } catch (error) {
+    throw Error('Could not get project')
+  }
+}
+
+async function postPalette(palette) {
+  try {
+    const response = await fetch('http://localhost:3000/api/v1/palettes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(palette)
+    })
+    const data = await response.json()
+  } catch (error) {
+    throw Error('Could not post the palette')
+  }
 }
 
 // API CALLS
