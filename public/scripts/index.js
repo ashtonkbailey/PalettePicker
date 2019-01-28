@@ -3,6 +3,7 @@ $('.new-colors').click(changeColors);
 $('.lock').click(toggleLockBtn);
 $(document).ready(changeColors);
 $('.project-btn').click((e) => addProject(e));
+$('.palette-btn').click((e) => addPalette(e));
 
 // fn to make random hex colors // returns 6 digit hex code
 function getRandomColor() {
@@ -49,6 +50,7 @@ function toggleLockBtn() {
   }
 };
 
+// ADD PROJECT
 function addProject(e) {
   e.preventDefault();
   const projectName = $('#project-input').val();
@@ -59,13 +61,21 @@ function addProject(e) {
 
 function addOption(name) {
   const select = $('#project-select');
-  select.append(`<option>${name}</option>`);
+  select.append(`<option value="${name}">${name}</option>`);
   $('#project-input').val('');
 };
 
 function showProject(name) {
-  $('.projects-container').append(`<div class="project-div"><h4>${name}</h4></div>`);
+  $('.projects-container').append(`<div class="project-div"><ul id=${name}>${name}</ul></div>`);
 };
+
+// ADD PALETTE
+function addPalette(e) {
+  e.preventDefault();
+  const paletteName = $('.palette-input').val();
+  const project = $('#project-select option:selected').text();
+  $(`#${project}`).append(`<li>${paletteName}</li>`);
+}
 
 // API CALLS
 async function getProjects() {
