@@ -14,7 +14,7 @@ body {
 /*COLOR PALETTE*/
 .palette-container {
   grid-area: sidebar;
-  max-width: 380px;
+  max-width: 360px;
   margin-left: 90px;
 }
 
@@ -22,7 +22,7 @@ body {
   background: #FFFFFF;
   box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
   border-radius: 26px 27px 0px 0px;
-  height: 92vh;
+  height: 94vh;
   margin-top: 20px;
   display: grid;
 }
@@ -54,7 +54,7 @@ h2 {
 }
 
 .first {
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .hex-container {
@@ -85,7 +85,17 @@ h2 {
 }
 
 .fifth-lock {
-  margin-bottom: 40px;
+  margin-bottom: 45px;
+}
+
+.tack-div {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tack {
+  height: 1.6em;
+  margin: 10px;
 }
 
 /*HEADER*/
@@ -97,13 +107,15 @@ h2 {
   text-align: center;
   color: #FFFFFF;
   text-shadow: 0px 4px 27px rgba(0, 0, 0, 0.66);
-  margin: 40px 0 20px;
+  margin: 40px 1.8em 20px 0;
   height: 1em;
 }
 
 /*MAIN SECTION*/
 .user-section {
-  background-color: #ffffff;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 3%;
+  font-family: 'Cabin Condensed', sans-serif;
   grid-area: main;
   display: flex;
   flex-direction: column;
@@ -115,6 +127,8 @@ h2 {
   margin-top: 2em;
   height: 4em;
   width: 10em;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 hr {
@@ -122,6 +136,10 @@ hr {
   width: 80%;
   border: 0;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+input, button {
+  border-radius: 10%;
 }
 
 /*PALETTE FORM*/
