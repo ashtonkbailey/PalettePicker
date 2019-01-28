@@ -15,9 +15,8 @@ async function loadPage() {
 }
 
 // Update colors
-// fn to make random hex colors // returns 6 digit hex code
 function getRandomColor() {
-  return Math.floor(Math.random()*16777215).toString(16);
+  return Math.floor(Math.random()*16777216).toString(16);
 };
 
 function changeColors() {
@@ -87,7 +86,7 @@ function addPalette(e) {
   const paletteName = $('.palette-input').val();
   const project = $('#project-select option:selected').text();
   const dashedProject = project.replace(/\s+/g, "-");
-  $(`#${dashedProject}`).append(`<li>${paletteName}</li>`);
+  $(`#${dashedProject}`).append(`<li><a>${paletteName}</a></li>`);
   assignPalette();
 
 };
@@ -101,7 +100,7 @@ async function assignPalette() {
   const color_five = $('.fifth-hex').text().replace(/[^0-9a-zA-Z]/g, '');
   const project_id = await getProjectID();
   const palette = { name, color_one, color_two, color_three, color_four, color_five, project_id };
-  console.log(palette);
+  console.log(palette); ///// not awaiting getProjectID????
   return palette
 }
 
