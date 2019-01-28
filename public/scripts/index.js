@@ -16,15 +16,31 @@ async function loadPage() {
 
 // Update colors
 function getRandomColor() {
-  return Math.floor(Math.random()*16777218).toString(16);
+  return Math.floor(Math.random()*16777220).toString(16);
 };
 
 function changeColors() {
-  const firstColor = getRandomColor();
-  const secondColor = getRandomColor();
-  const thirdColor = getRandomColor();
-  const fourthColor = getRandomColor();
-  const fifthColor = getRandomColor();
+  let firstColor = getRandomColor();
+  let secondColor = getRandomColor();
+  let thirdColor = getRandomColor();
+  let fourthColor = getRandomColor();
+  let fifthColor = getRandomColor();
+
+  if ($('.first').hasClass('locked')) {
+    firstColor = $('.first-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  }
+  if ($('.second').hasClass('locked')) {
+    secondColor = $('.second-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  }
+  if ($('.third').hasClass('locked')) {
+    thirdColor = $('.third-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  }
+  if ($('.fourth').hasClass('locked')) { 
+    fourthColor = $('.fourth-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  }
+  if ($('.fifth').hasClass('locked')) {
+    fifthColor = $('.fifth-hex').text().replace(/[^0-9a-zA-Z]/g, '');
+  }
 
   assignColors(firstColor, secondColor, thirdColor, fourthColor, fifthColor);
   changeBackground(firstColor, secondColor, thirdColor, fourthColor, fifthColor)
@@ -58,6 +74,7 @@ function toggleLockBtn() {
     $(this).parent().prev().toggleClass('locked');
   } else {
     $(this).text('lock');
+    $(this).parent().prev().toggleClass('locked');
   }
 };
 
