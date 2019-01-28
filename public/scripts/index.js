@@ -1,5 +1,3 @@
-import * from './apiCalls';
-
 // EVENT LISTENERS
 $('.new-colors').click(changeColors);
 $('.lock').click(toggleLockBtn);
@@ -54,8 +52,8 @@ function toggleLockBtn() {
 function addProject(e) {
   e.preventDefault();
   const projectName = $('#project-input').val();
-  addOption(projectName);
   postProject(projectName);
+  addOption(projectName);
   showProject(projectName);
 };
 
@@ -67,4 +65,39 @@ function addOption(name) {
 
 function showProject(name) {
   $('.projects-container').append(`<div class="project-div"><h4>${name}</h4></div>`);
-}
+};
+
+// API CALLS
+async function getProjects() {
+  try {
+    const response = await fetch('http://localhost:3000/api/v1/projects');
+    if (!response.ok) {
+      throw Error('Couldn\'t get your projects!')
+    }
+    const projects = await response.json()
+    return projects;
+  } catch (error) {
+    throw Error('Couldn\'t get your projects!')
+  }
+};
+
+async function postProject(projectName) {
+  const projects = await getProjects();
+
+  projects.map(project => {
+    if (project.name === projectName) {
+      alert('That project already exists! Please try a different name.');
+      return;
+    } else {
+      return fetch('http://localhost:3000/api/v1/projects', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name: projectName })
+      })
+        .then(response => response.json())
+        .catch(error => console.log(error))
+    }
+  })
+};
