@@ -11,6 +11,10 @@ body {
   height: 100vh;
 }
 
+button {
+  cursor: pointer;
+}
+
 /*COLOR PALETTE*/
 .palette-container {
   grid-area: sidebar;
@@ -76,6 +80,8 @@ h2 {
   border: none;
   padding: 0 30px;
   text-align: end;
+  z-index: 99;
+  outline: none;
 }
 
 .lock:hover {

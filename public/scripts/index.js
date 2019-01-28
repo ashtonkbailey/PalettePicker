@@ -16,7 +16,7 @@ async function loadPage() {
 
 // Update colors
 function getRandomColor() {
-  return Math.floor(Math.random()*16777216).toString(16);
+  return Math.floor(Math.random()*16777218).toString(16);
 };
 
 function changeColors() {
@@ -55,6 +55,7 @@ function changeColorLabels(color1, color2, color3, color4, color5) {
 function toggleLockBtn() {
   if (this.innerText === 'lock') {
     $(this).text('locked');
+    $(this).parent().prev().toggleClass('locked');
   } else {
     $(this).text('lock');
   }
