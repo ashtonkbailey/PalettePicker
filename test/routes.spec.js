@@ -1,5 +1,5 @@
-const chai = require('chai');
-const should = chai.should();
+let chai = require('chai');
+let should = chai.should();
 
 describe('tests', () => {
   it('should run tests', () => {
