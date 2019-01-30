@@ -2,3 +2,4 @@
 
 # set the language so it knows which commands to use; default is ruby
 language: node_js
+node_js:  -"node"
